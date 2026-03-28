@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Para Bianca 💛</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(#ffdde1, #ee9ca7);
+    font-family: Arial;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1 {
+    color: purple;
+    margin-top: 80px;
+}
+
+.fall {
+    position: absolute;
+    top: -20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+button {
+    margin-top: 10px;
+    padding: 20px 100px;
+    border: none;
+    background: white;
+    color: #ff4d6d;
+    font-size: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.carta {
+    background: white;
+    padding: 20px;
+    border-radius: 50px;
+    margin: 20px;
+    display: none;
+}
+
+#contador {
+    color: purple;
+    font-size: 50px;
+    position: relative;
+    z-index: 999;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Para Bianca 💛</h1>
+
+<p id="contador"></p>
+
+<p style="color:white;">Clique abaixo 💌</p>
+
+<button onclick="abrirCarta1()" id="btn1">Abrir Carta 💖 💌</button>
+
+<button onclick="abrirCarta2()" id="btn2" style="display:none;">
+    Mais uma surpresa 💖
+</button>
+
+<button onclick="final()" id="btn3" style="display:none;">
+    Mais uma porque EU TE AMOOO 💖
+</button>
+
+<div id="carta1" class="carta">
+    Amor... 💛<br><br>
+    Obrigado por me fazer tãooo bem...
+</div>
+
+<div id="carta2" class="carta">
+    Eu te amo em cada detalhe seu 💖<br><br>
+    Seu sorriso, seu cabelo, seu jeitinho, tudoooo 💖
+</div>
+
+<div id="carta3" class="carta">
+    Esses foram os melhores 9 meses da minha vida sem dúvidas meu amor, <br><br>
+    tudo que passei ao seu lado, tudo que aprendi, as risadas...foi tudo <br><br>
+    muuuuito incrível.<br><br>
+    <b>EU TE AMO ❤️</b>
+</div>
+
+<audio id="musica" loop>
+  <source src="b.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// 🔥 CONTROLE DE ANIMAÇÃO
+let modo = "coracoes";
+
+// 📸 SUAS FOTOS
+const fotos = [
+    "amor1.jpg",
+    "amor2.jpg",
+    "amor3.jpg",
+    "amor4.jpg",
+    "amor9.jpg",
+    "amor6.jpg",
+    "amor7.jpg",
+    "amor8.jpg",
+    "amor10.jpg",
+    "amor11.jpg",
+    "amor0.jpg",
+    "amor5.jpg"
+];
+
+// ❤️ CORAÇÕES
+function criarCoracao() {
+    let c = document.createElement("div");
+    c.className = "fall";
+    c.innerHTML = "❤️";
+
+    c.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+    c.style.fontSize = (10 + Math.random() * 40) + "px";
+    c.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+    document.body.appendChild(c);
+
+    setTimeout(() => c.remove(), 5000);
+}
+
+// 📸 FOTOS
+function criarFoto() {
+    let img = document.createElement("img");
+
+    img.src = fotos[Math.floor(Math.random() * fotos.length)];
+    img.className = "fall";
+
+    img.style.left = Math.random() * window.innerWidth + "px";
+    img.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+    img.style.width = (40 + Math.random() * 60) + "px";
+    img.style.borderRadius = "10px";
+    img.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+
+    document.body.appendChild(img);
+
+    setTimeout(() => img.remove(), 6000);
+}
+
+// 🎯 CONTROLADOR
+function animacao() {
+    if (modo === "coracoes") {
+        criarCoracao();
+    } else {
+        criarFoto();
+    }
+}
+
+// 🔄 LOOP DA ANIMAÇÃO
+setInterval(animacao, 200);
+
+// 💌 CARTAS
+function abrirCarta1() {
+    document.getElementById("carta1").style.display = "block";
+    document.getElementById("btn2").style.display = "inline-block";
+    document.getElementById("btn1").style.display = "none";
+    document.getElementById("musica").play();
+}
+
+function abrirCarta2() {
+    document.getElementById("carta2").style.display = "block";
+    document.getElementById("btn3").style.display = "inline-block";
+    document.getElementById("btn2").style.display = "none";
+}
+
+function final() {
+    document.getElementById("carta1").style.display = "none";
+    document.getElementById("carta2").style.display = "none";
+    document.getElementById("carta3").style.display = "block";
+    document.getElementById("btn3").style.display = "none";
+
+    modo = "fotos"; // 🔥 TROCA PRA FOTOS
+}
+
+// ⏳ CONTADOR
+function atualizarContador() {
+    const inicio = new Date("2025-06-30T00:00:00");
+    const agora = new Date();
+
+    const diff = agora.getTime() - inicio.getTime();
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diff / (1000 * 60)) % 60);
+    const segundos = Math.floor((diff / 1000) % 60);
+
+    const el = document.getElementById("contador");
+
+    if (el) {
+        el.innerHTML = `
+Estamos juntos há <br><b>${dias}</b> dias, <b>${horas}h</b> <b>${minutos}min</b> <b>${segundos}s</b>`;
+    }
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+
+</script>
+
+</body>
+</html>
